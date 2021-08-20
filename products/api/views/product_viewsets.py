@@ -2,13 +2,14 @@ from rest_framework import generics
 from rest_framework import status
 from rest_framework import viewsets
 from base.api import GeneralListApiView
+from users.authentication_mixins import Authentication
 from rest_framework.response import Response
 from products.api.serializers.product_serializers import ProductSerializer
 
 
 #AQUI SE DEFINE UN CRUD
 
-class ProductViewSet(viewsets.ModelViewSet):
+class ProductViewSet(Authentication,viewsets.ModelViewSet):
     serializer_class=ProductSerializer
     def get_queryset(self,pk=None):
         if pk is None:
